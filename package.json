@@ -1,0 +1,19 @@
+{
+  "name"            : "simock",
+  "version"         : "0.0.1",
+  "description"     : "Simple mocking library for unit testing",
+  "homepage"        : "http://github.com/abhihebbar/simock",
+  "repository"      : "http://github.com/abhihebbar/simock.git",
+  "license"         : "MIT",
+  "author"          : "Abhilash Hebbar<abhi.h@openly.co>",
+  "main"            : "lib/mock",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register -R spec -r should"
+  },
+  "dependencies"    : { "underscore":"*" },
+  "devDependencies" : { 
+    "should": "*",
+    "mocha": "*",
+    "coffee-script": "*"
+  }
+}
