@@ -24,6 +24,13 @@ class Mock
       @checkArgs(@functions[name].takes, _.values args)
 
     @callsLog[name] += 1
+
+    if @functions[name].calls
+      unless typeof args[@functions[name].calls] is 'function'
+        throw new Error("Expected #{@functions[name].calls + 1}th argument to be function")
+
+      args[@functions[name].calls].apply(@, @functions[name].with)
+
     return @functions[name].returns if @functions[name].returns?
 
   checkArgs: (expected, actual)->

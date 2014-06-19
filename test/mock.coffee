@@ -46,5 +46,5 @@ describe 'Simple Mock', ->
     m.modify 'someFunction', { calls: 1, with: [null, 'abcd'] };
 
     m.someFunction null, (e, data)->
-      e.should.not.be.ok
       data.should.eql('abcd')
+      done()
