@@ -34,6 +34,7 @@ class Mock
     return @functions[name].returns if @functions[name].returns?
 
   checkArgs: (expected, actual)->
+    expected = expected() if typeof expected is "function"
     matching = true;
     for idx of expected
       matching = false if typeof expected[idx] isnt typeof actual[idx]
@@ -49,10 +50,12 @@ class Mock
 
 class MockClass
   constructor: (functions) ->
+    functions.push('constructor');
     @mock = new Mock(functions)
     @instanceCnt = 0
 
   constructorFn: () =>
+    @mock.constructor arguments;
     @instanceCnt++
     return @mock
 
