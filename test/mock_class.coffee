@@ -12,3 +12,18 @@ describe 'Mocked Class', ->
     mi = new m.constructorFn
     mi.someFunction()
     m.isCalled('someFunction').should.be.ok
+
+  it 'should mock constructor methods of the instance', () ->
+    m = mockClass 'someFunction'
+    m.modify 'constructor',{'takes':['a', 1, ->]}
+    
+    m.isCalled('constructor').should.not.be.ok
+
+    incorrectInst = ()->
+      mi = new m.constructorFn('a')
+    incorrectInst.should.throw();
+
+    correctInst = ()->
+      mi = new m.constructorFn('a', 1, ->)
+    correctInst.should.not.throw();
+    m.isCalled('constructor').should.be.ok

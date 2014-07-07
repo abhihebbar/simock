@@ -50,12 +50,13 @@ class Mock
 
 class MockClass
   constructor: (functions) ->
+    functions = [functions] unless functions instanceof Array
     functions.push('constructor');
     @mock = new Mock(functions)
     @instanceCnt = 0
 
   constructorFn: () =>
-    @mock.constructor arguments;
+    @mock.callMock 'constructor', _.values arguments;
     @instanceCnt++
     return @mock
 
