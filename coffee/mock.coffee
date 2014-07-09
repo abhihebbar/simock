@@ -48,6 +48,9 @@ class Mock
   getCallCount: (name)->
     @callsLog[name]
 
+  reset: ()->
+    @callsLog = {}
+
 class MockClass
   constructor: (functions) ->
     functions = [functions] unless functions instanceof Array
@@ -77,6 +80,10 @@ class MockClass
 
   getCallCount: (name)->
     @mock.getCallCount name
+
+  reset: ()->
+    @instanceCnt = 0;
+    @mock.reset();
 
 global.mock = (functions)->
   new Mock(functions);
