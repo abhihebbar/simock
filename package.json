@@ -1,6 +1,6 @@
 {
   "name"            : "simock",
-  "version"         : "0.0.4",
+  "version"         : "0.0.6",
   "description"     : "Simple mocking library for unit testing",
   "homepage"        : "http://github.com/abhihebbar/simock",
   "repository"      : "http://github.com/abhihebbar/simock.git",

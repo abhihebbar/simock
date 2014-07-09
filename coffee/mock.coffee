@@ -24,6 +24,7 @@ class Mock
       @checkArgs(@functions[name].takes, _.values args)
 
     @callsLog[name] += 1
+    @callsLog[name] = 1 if isNaN(@callsLog[name])
 
     if @functions[name].calls?
       unless typeof args[@functions[name].calls] is 'function'
