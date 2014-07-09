@@ -25,7 +25,7 @@ class Mock
 
     @callsLog[name] += 1
 
-    if @functions[name].calls
+    if @functions[name].calls?
       unless typeof args[@functions[name].calls] is 'function'
         throw new Error("Expected #{@functions[name].calls + 1}th argument to be function")
 
