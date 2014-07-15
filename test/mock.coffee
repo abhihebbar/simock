@@ -41,6 +41,24 @@ describe 'Simple Mock', ->
       m.someFunction('a', 1, ->)
     correctFn.should.not.throw();
 
+  it 'should check if called arguments matches specification as function', () ->
+    m = mock 'someFunction'
+    m.modify 'someFunction',
+      'takes':(args)-> 
+        return args.length == 1
+        
+    incorrectFn = ()->
+      m.someFunction()
+    incorrectFn.should.throw();
+
+    incorrectFn1 = ()->
+      m.someFunction('a','b')
+    incorrectFn1.should.throw();
+
+    correctFn = ()->
+      m.someFunction('a')
+    correctFn.should.not.throw();
+
   it 'should call the specified callback function', (done) ->
     m = mock 'someFunction'
     m.modify 'someFunction', { calls: 1, with: [null, 'abcd'] };

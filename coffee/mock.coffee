@@ -35,12 +35,14 @@ class Mock
     return @functions[name].returns if @functions[name].returns?
 
   checkArgs: (expected, actual)->
-    return expected(actual) if typeof expected is "function"
     matching = true;
-    for idx of expected
-      matching = false if typeof expected[idx] isnt typeof actual[idx]
-      matching = false if typeof expected[idx] is 'string' and expected[idx] != actual[idx]
-      matching = false if typeof expected[idx] is 'number' and expected[idx] != actual[idx]
+    if typeof expected is "function"
+      matching = expected(actual) 
+    else
+      for idx of expected
+        matching = false if typeof expected[idx] isnt typeof actual[idx]
+        matching = false if typeof expected[idx] is 'string' and expected[idx] != actual[idx]
+        matching = false if typeof expected[idx] is 'number' and expected[idx] != actual[idx]
     throw new Error("Mock called with unexpected args") unless matching
 
   isCalled: (name)->
