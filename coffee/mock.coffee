@@ -35,7 +35,7 @@ class Mock
     return @functions[name].returns if @functions[name].returns?
 
   checkArgs: (expected, actual)->
-    expected = expected() if typeof expected is "function"
+    return expected(actual) if typeof expected is "function"
     matching = true;
     for idx of expected
       matching = false if typeof expected[idx] isnt typeof actual[idx]
