@@ -40,9 +40,14 @@ class Mock
       matching = expected(actual) 
     else
       for idx of expected
-        matching = false if typeof expected[idx] isnt typeof actual[idx]
-        matching = false if typeof expected[idx] is 'string' and expected[idx] != actual[idx]
-        matching = false if typeof expected[idx] is 'number' and expected[idx] != actual[idx]
+        if (typeof expected[idx] isnt typeof actual[idx])
+          matching = false
+        
+        if typeof expected[idx] isnt 'function'
+          matching = _.isEqual(expected[idx], actual[idx])
+
+        break unless matching
+        
     throw new Error("Mock called with unexpected args") unless matching
 
   isCalled: (name)->
