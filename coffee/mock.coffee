@@ -107,6 +107,7 @@ global.mock = (functions)->
 global.mockFor = (module, functions)->
   mock = new Mock(functions);
   mockery.registerMock(module, mock)
+  return mock
 
 global.mockClass = (functions)->
   new MockClass(functions)
@@ -114,3 +115,4 @@ global.mockClass = (functions)->
 global.mockClassFor = (module, functions)->
   mock = new MockClass(functions)
   mockery.registerMock(module, mock)
+  return mock
