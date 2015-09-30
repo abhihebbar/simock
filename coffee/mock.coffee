@@ -1,4 +1,5 @@
 _ = require 'underscore'
+mockery = require 'mockery'
 
 class Mock
   constructor: (functions) ->
@@ -93,8 +94,23 @@ class MockClass
     @instanceCnt = 0;
     @mock.reset();
 
+global.enableMocks = ()->
+  mockery.enable({useCleanCache: true})
+
+global.disableMocks = ()->
+  mockery.deregisterAll();
+  mockery.disable();
+
 global.mock = (functions)->
   new Mock(functions);
 
+global.mockFor = (module, functions)->
+  mock = new Mock(functions);
+  mockery.registerMock(module, mock)
+
 global.mockClass = (functions)->
   new MockClass(functions)
+
+global.mockClassFor = (module, functions)->
+  mock = new MockClass(functions)
+  mockery.registerMock(module, mock)

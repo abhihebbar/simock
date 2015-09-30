@@ -1,6 +1,6 @@
 {
   "name": "simock",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Simple mocking library for unit testing",
   "homepage": "http://github.com/abhihebbar/simock",
   "repository": "http://github.com/abhihebbar/simock.git",
@@ -11,6 +11,7 @@
     "test": "node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register -R spec -r should"
   },
   "dependencies": {
+    "mockery": "^1.4.0",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
